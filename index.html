@@ -149,10 +149,12 @@
     border: 2px solid var(--manga-black);
     box-shadow: 4px 4px 0px rgba(0,0,0,0.6);
     position: absolute;
-    z-index: 6;
-    width: 115px;
-    height: 115px;
+    z-index: 1;
+    width: 110px;
+    height: 110px;
     pointer-events: none;
+    opacity: 0.55;
+    filter: saturate(85%);
   }
 
   .photo-panel img {
@@ -164,14 +166,14 @@
   }
 
   .photo-panel.photo-1 {
-    top: -20px;
-    left: -22px;
+    top: -45px;
+    left: -70px;
     transform: rotate(-9deg);
   }
 
   .photo-panel.photo-2 {
-    bottom: -20px;
-    right: -22px;
+    bottom: -45px;
+    right: -70px;
     transform: rotate(8deg);
   }
 
@@ -190,11 +192,11 @@
 
   @media (max-width: 600px) {
     .photo-panel {
-      width: 78px;
-      height: 78px;
+      width: 70px;
+      height: 70px;
     }
-    .photo-panel.photo-1 { top: -14px; left: -10px; }
-    .photo-panel.photo-2 { bottom: -14px; right: -10px; }
+    .photo-panel.photo-1 { top: -25px; left: -20px; }
+    .photo-panel.photo-2 { bottom: -25px; right: -20px; }
   }
 
   /* PETALI DI SAKURA */
@@ -480,6 +482,8 @@
   .message {
     font-size: 17px;
     line-height: 1.8;
+    position: relative;
+    z-index: 2;
   }
 
   .message span.highlight-name {
