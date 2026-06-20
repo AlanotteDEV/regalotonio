@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VIP Pass Horizon - Buon Compleanno Antonio!</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;0,900;1,900&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --fh-pink: #ff0078;
+    --fh-blue: #00f0ff;
+    --fh-dark: #121212;
+    --fh-card: #1e1e24;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background-color: var(--fh-dark);
+    /* Sfondo a griglia in movimento stile retrowave/corsa */
+    background-image: 
+      linear-gradient(rgba(255, 0, 120, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 240, 255, 0.1) 1px, transparent 1px);
+    background-size: 30px 30px;
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    overflow-x: hidden;
+  }
+
+  /* Animazione di sfondo */
+  @keyframes moveGrid {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(30px); }
+  }
+
+  .grid-overlay {
+    position: fixed;
+    top: -30px; left: 0; right: 0; bottom: 0;
+    background-image: inherit;
+    background-size: inherit;
+    z-index: -1;
+    animation: moveGrid 2s linear infinite;
+  }
+
+  .ticket {
+    position: relative;
+    background-color: var(--fh-card);
+    /* Effetto fibra di carbonio */
+    background-image: radial-gradient(#333 15%, transparent 16%), radial-gradient(#333 15%, transparent 16%);
+    background-size: 8px 8px;
+    background-position: 0 0, 4px 4px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 800px;
+    box-shadow: 
+      0 0 20px rgba(0,0,0,0.8),
+      0 0 30px rgba(255, 0, 120, 0.3),
+      inset 0 0 15px rgba(0, 240, 255, 0.2);
+    overflow: hidden;
+    border: 2px solid #333;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%);
+  }
+
+  /* Bordo superiore al neon */
+  .ticket::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--fh-pink), var(--fh-blue), var(--fh-pink));
+    background-size: 200% 100%;
+    animation: neonFlow 3s linear infinite;
+  }
+
+  @keyframes neonFlow {
+    0% { background-position: 100% 0; }
+    100% { background-position: -100% 0; }
+  }
+
+  .header {
+    background: rgba(0, 0, 0, 0.85);
+    padding: 30px 20px;
+    text-align: center;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+  }
+
+  .header-badge {
+    position: absolute;
+    top: 15px;
+    left: -35px;
+    background: var(--fh-pink);
+    color: white;
+    padding: 5px 40px;
+    font-weight: 900;
+    font-style: italic;
+    font-size: 14px;
+    letter-spacing: 2px;
+    transform: rotate(-45deg);
+    box-shadow: 0 0 15px var(--fh-pink);
+  }
+
+  .title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 1.1;
+    color: #fff;
+    text-shadow: 2px 2px 0px var(--fh-pink), -2px -2px 0px var(--fh-blue);
+    font-style: italic;
+  }
+
+  .subtitle {
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--fh-blue);
+    margin-top: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  .content {
+    padding: 40px;
+    background: rgba(0,0,0,0.4);
+    text-align: center;
+  }
+
+  .message {
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 30px;
+    font-weight: 500;
+  }
+
+  .message span {
+    color: var(--fh-pink);
+    font-weight: 900;
+    font-style: italic;
+    font-size: 22px;
+  }
+
+  .image-wrapper {
+    background: #000;
+    padding: 10px;
+    border-radius: 8px;
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    margin: 0 auto 30px auto;
+    position: relative;
+    max-width: 600px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+
+  .image-wrapper:hover {
+    transform: scale(1.02);
+    border-color: var(--fh-blue);
+  }
+
+  .image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 4px;
+  }
+
+  .image-wrapper::after {
+    content: 'CODICE FESTIVAL UFFICIALE';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--fh-blue);
+    color: #000;
+    padding: 2px 15px;
+    font-size: 12px;
+    font-weight: 900;
+    border-radius: 10px;
+    letter-spacing: 1px;
+  }
+
+  .instructions {
+    background: linear-gradient(90deg, rgba(255,0,120,0.1), rgba(0,240,255,0.1));
+    border-left: 4px solid var(--fh-pink);
+    padding: 25px;
+    text-align: left;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .instructions h3 {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .instructions ol {
+    margin-left: 20px;
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  .instructions li::marker {
+    color: var(--fh-blue);
+    font-weight: 900;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 20px;
+    background: rgba(0,0,0,0.9);
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 2px;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .title { font-size: 32px; }
+    .subtitle { font-size: 16px; }
+    .content { padding: 20px; }
+    .header-badge { display: none; }
+  }
+
+  /* Modalità Stampa: Rimuove i colori scuri pesanti per risparmiare inchiostro se viene stampato */
+  @media print {
+    body { background: white; color: black; }
+    .grid-overlay { display: none; }
+    .ticket { background: white; box-shadow: none; border: 2px solid black; clip-path: none; }
+    .header { background: white; border-bottom: 2px solid black; }
+    .title { color: black; text-shadow: none; }
+    .subtitle { color: black; }
+    .content, .footer, .instructions { background: white; color: black; }
+    .message span { color: black; }
+    .image-wrapper { border: 1px solid black; box-shadow: none; }
+    .image-wrapper::after { background: black; color: white; }
+    .instructions { border: 1px solid black; border-left: 4px solid black; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grid-overlay"></div>
+
+<div class="ticket">
+  <div class="header">
+    <div class="header-badge">VIP PASS</div>
+    <h1 class="title">Forza Horizon Festival</h1>
+    <div class="subtitle">Livello 25 Sbloccato</div>
+  </div>
+  
+  <div class="content">
+    <div class="message">
+      Benvenuto nel club, Pilota!<br>
+      Il motore è su di giri, la griglia di partenza è allineata e il tuo nuovo bolide ti aspetta.<br>
+      <span>BUON 25° COMPLEANNO ANTONIO!</span><br>
+      Preparati a bruciare l'asfalto in Giappone!
+    </div>
+
+    <!-- Immagine fornita -->
+    <div class="image-wrapper">
+      <img src="Screenshot 2026-06-20 131711.png" alt="Codice Regalo Microsoft Store Forza Horizon 6" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'300\' viewBox=\'0 0 600 300\'%3E%3Crect width=\'600\' height=\'300\' fill=\'%23111\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' font-family=\'Arial\' font-size=\'20\' fill=\'%23ff0078\' text-anchor=\'middle\' alignment-baseline=\'middle\'%3E%E2%9A%A0%FE%0F Assicurati che l\'immagine \'Screenshot 2026-06-20 131711.png\' sia in questa cartella%3C/text%3E%3C/svg%3E'">
+    </div>
+
+    <div class="instructions">
+      <h3>🏎️ Telemetria & Riscatto</h3>
+      <ol>
+        <li>Accendi il motore della tua <strong>Xbox</strong> o apri il <strong>Microsoft Store</strong> su PC.</li>
+        <li>Naviga fino ai box nella sezione <strong>"Riscatta codice"</strong>.</li>
+        <li>Inserisci la stringa alfanumerica di 25 caratteri riportata nel pass qui sopra.</li>
+        <li>Conferma, scarica l'aggiornamento e mettiti al volante!</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="footer">
+    VALIDO PER: PC & XBOX SERIES X|S • REGIONE: WORLDWIDE • ACCESSO: GARANTITO
+  </div>
+</div>
+
+</body>
+</html>
