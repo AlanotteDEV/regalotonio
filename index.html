@@ -3,14 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VIP Pass Horizon - Buon Compleanno Antonio!</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;0,900;1,900&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+<title>Horizon Japan Pass - Antonio 25!</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;0,900;1,900&family=Oswald:wght@500;700;900&family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
 <style>
   :root {
     --fh-pink: #ff0078;
     --fh-blue: #00f0ff;
-    --fh-dark: #121212;
-    --fh-card: #1e1e24;
+    --fh-dark: #07070a;
+    --fh-card: #111116;
+    --manga-white: #ffffff;
+    --manga-black: #000000;
+    --sakura-pink: #ffb7c5;
   }
 
   * {
@@ -21,274 +24,481 @@
 
   body {
     background-color: var(--fh-dark);
-    /* Sfondo a griglia in movimento stile retrowave/corsa */
-    background-image: 
-      linear-gradient(rgba(255, 0, 120, 0.1) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 240, 255, 0.1) 1px, transparent 1px);
-    background-size: 30px 30px;
     font-family: 'Montserrat', sans-serif;
     color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    padding: 20px;
+    padding: 40px 20px;
     overflow-x: hidden;
+    position: relative;
   }
 
-  /* Animazione di sfondo */
-  @keyframes moveGrid {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(30px); }
-  }
-
-  .grid-overlay {
+  /* SFONDO GIAPPONE ARTISTICO */
+  .japan-bg {
     position: fixed;
-    top: -30px; left: 0; right: 0; bottom: 0;
-    background-image: inherit;
-    background-size: inherit;
-    z-index: -1;
-    animation: moveGrid 2s linear infinite;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    background: 
+      radial-gradient(circle at 50% 30%, rgba(255, 0, 120, 0.15) 0%, transparent 60%),
+      linear-gradient(to bottom, #07070a 0%, #150510 100%);
+    overflow: hidden;
   }
 
+  /* Il Sole Rosso (Hinomaru) */
+  .rising-sun {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(255, 0, 80, 0.6) 0%, rgba(255, 0, 120, 0) 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(10px);
+  }
+
+  /* Sagoma Monte Fuji in fondo */
+  .fuji-silhouette {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 1200px;
+    height: 350px;
+    pointer-events: none;
+    opacity: 0.15;
+    z-index: -1;
+  }
+
+  /* PETALI DI CILIEGIO CADENTI (SAKURA) */
+  .sakura-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .petal {
+    position: absolute;
+    background-color: var(--sakura-pink);
+    border-radius: 150% 0 150% 150%;
+    width: 12px;
+    height: 8px;
+    opacity: 0.8;
+    transform: rotate(-45deg);
+    animation: fall linear infinite;
+  }
+
+  @keyframes fall {
+    0% {
+      top: -10%;
+      transform: translateX(0) rotate(-45deg) scale(1);
+    }
+    100% {
+      top: 110%;
+      transform: translateX(200px) rotate(315deg) scale(0.6);
+    }
+  }
+
+  /* Generazione dinamica posizioni petali */
+  .petal:nth-child(1) { left: 10%; width: 14px; height: 9px; animation-duration: 12s; animation-delay: 0s; }
+  .petal:nth-child(2) { left: 25%; width: 10px; height: 7px; animation-duration: 15s; animation-delay: 2s; }
+  .petal:nth-child(3) { left: 40%; width: 12px; height: 8px; animation-duration: 10s; animation-delay: 4s; }
+  .petal:nth-child(4) { left: 55%; width: 15px; height: 10px; animation-duration: 18s; animation-delay: 1s; }
+  .petal:nth-child(5) { left: 70%; width: 9px; height: 6px; animation-duration: 14s; animation-delay: 5s; }
+  .petal:nth-child(6) { left: 85%; width: 13px; height: 9px; animation-duration: 11s; animation-delay: 3s; }
+  .petal:nth-child(7) { left: 95%; width: 11px; height: 7px; animation-duration: 16s; animation-delay: 7s; }
+  .petal:nth-child(8) { left: 15%; width: 12px; height: 8px; animation-duration: 13s; animation-delay: 6s; }
+  .petal:nth-child(9) { left: 50%; width: 14px; height: 9px; animation-duration: 17s; animation-delay: 9s; }
+  .petal:nth-child(10) { left: 80%; width: 10px; height: 7px; animation-duration: 12s; animation-delay: 8s; }
+
+  /* IL TICKET / BIGLIETTO */
   .ticket {
     position: relative;
     background-color: var(--fh-card);
-    /* Effetto fibra di carbonio */
-    background-image: radial-gradient(#333 15%, transparent 16%), radial-gradient(#333 15%, transparent 16%);
-    background-size: 8px 8px;
-    background-position: 0 0, 4px 4px;
-    border-radius: 12px;
+    background-image: 
+      linear-gradient(135deg, rgba(17, 17, 22, 0.95) 0%, rgba(8, 8, 12, 0.98) 100%),
+      radial-gradient(circle at 50% 0%, rgba(0, 240, 255, 0.08), transparent 50%);
+    border-radius: 20px;
     width: 100%;
-    max-width: 800px;
+    max-width: 780px;
     box-shadow: 
-      0 0 20px rgba(0,0,0,0.8),
-      0 0 30px rgba(255, 0, 120, 0.3),
-      inset 0 0 15px rgba(0, 240, 255, 0.2);
+      0 20px 60px rgba(0,0,0,0.9),
+      0 0 50px rgba(255, 0, 120, 0.3),
+      inset 0 0 20px rgba(0, 240, 255, 0.1);
     overflow: hidden;
-    border: 2px solid #333;
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%);
+    border: 3px solid var(--manga-black);
+    transform: rotate(-0.5deg);
+    z-index: 10;
   }
 
-  /* Bordo superiore al neon */
+  /* Cornice Neon con nodi angolari */
   .ticket::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 6px;
     background: linear-gradient(90deg, var(--fh-pink), var(--fh-blue), var(--fh-pink));
-    background-size: 200% 100%;
-    animation: neonFlow 3s linear infinite;
   }
 
-  @keyframes neonFlow {
-    0% { background-position: 100% 0; }
-    100% { background-position: -100% 0; }
+  /* Banner Superiore Manga-Style */
+  .manga-banner {
+    background: var(--manga-black);
+    color: var(--manga-white);
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 900;
+    font-size: 13px;
+    letter-spacing: 4px;
+    border-bottom: 3px solid var(--manga-black);
   }
 
-  .header {
-    background: rgba(0, 0, 0, 0.85);
-    padding: 30px 20px;
-    text-align: center;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-    position: relative;
-  }
-
-  .header-badge {
-    position: absolute;
-    top: 15px;
-    left: -35px;
+  .manga-banner span {
     background: var(--fh-pink);
     color: white;
-    padding: 5px 40px;
-    font-weight: 900;
+    padding: 3px 12px;
+    transform: skewX(-15deg);
     font-style: italic;
-    font-size: 14px;
-    letter-spacing: 2px;
-    transform: rotate(-45deg);
-    box-shadow: 0 0 15px var(--fh-pink);
+    box-shadow: 0 0 10px var(--fh-pink);
+  }
+
+  /* Header con Titolo Esplosivo */
+  .header {
+    background: radial-gradient(circle, rgba(255,0,120,0.15) 0%, transparent 80%), var(--manga-black);
+    padding: 45px 20px;
+    text-align: center;
+    position: relative;
+    border-bottom: 4px solid var(--manga-black);
+  }
+
+  /* Esplosione Manga per l'età (25 anni) */
+  .manga-burst {
+    position: absolute;
+    right: 35px;
+    top: 20px;
+    background: #ffff00;
+    color: #000;
+    font-family: 'Oswald', sans-serif;
+    font-size: 26px;
+    font-weight: 900;
+    padding: 12px 18px;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    transform: rotate(12deg);
+    z-index: 5;
+    animation: pulseBurst 1s infinite alternate;
+  }
+
+  @keyframes pulseBurst {
+    0% { transform: rotate(12deg) scale(0.95); }
+    100% { transform: rotate(12deg) scale(1.15); }
   }
 
   .title {
     font-family: 'Oswald', sans-serif;
-    font-size: 48px;
-    font-weight: 700;
+    font-size: 58px;
+    font-weight: 900;
     text-transform: uppercase;
     margin: 0;
-    line-height: 1.1;
-    color: #fff;
-    text-shadow: 2px 2px 0px var(--fh-pink), -2px -2px 0px var(--fh-blue);
+    line-height: 1;
+    color: var(--manga-white);
+    text-shadow: 
+      3px 3px 0px var(--fh-pink), 
+      -3px -3px 0px var(--fh-blue),
+      6px 6px 0px var(--manga-black);
     font-style: italic;
+    letter-spacing: -1px;
   }
 
-  .subtitle {
+  .japanese-title {
+    font-family: 'Noto Sans JP', sans-serif;
     font-size: 22px;
     font-weight: 900;
     color: var(--fh-blue);
-    margin-top: 10px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
+    margin-top: 15px;
+    letter-spacing: 6px;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.9);
   }
 
   .content {
     padding: 40px;
-    background: rgba(0,0,0,0.4);
     text-align: center;
+    position: relative;
+  }
+
+  /* Kanji d'acqua giganti sfumati ai lati del biglietto */
+  .side-kanji-left, .side-kanji-right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 85px;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.025);
+    pointer-events: none;
+    user-select: none;
+    line-height: 1.2;
+    z-index: 1;
+  }
+  .side-kanji-left { left: 15px; text-align: left; }
+  .side-kanji-right { right: 15px; text-align: right; }
+
+  /* Messaggio in stile nuvoletta manga */
+  .message-box {
+    background: rgba(0,0,0,0.8);
+    border: 3px solid var(--manga-black);
+    border-radius: 14px;
+    padding: 25px;
+    margin-bottom: 35px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 6px 6px 0px var(--fh-pink);
+  }
+
+  .message-box::before {
+    content: 'ブォォォォ！'; /* Onomatopea Rombo Motore */
+    position: absolute;
+    top: -18px;
+    left: 25px;
+    background: var(--fh-blue);
+    color: var(--manga-black);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 13px;
+    font-weight: 900;
+    padding: 3px 12px;
+    border: 2px solid var(--manga-black);
+    border-radius: 4px;
+    transform: rotate(-4deg);
+    box-shadow: 2px 2px 0px var(--manga-black);
   }
 
   .message {
-    font-size: 18px;
+    font-size: 17px;
     line-height: 1.8;
-    margin-bottom: 30px;
-    font-weight: 500;
   }
 
-  .message span {
-    color: var(--fh-pink);
+  .message span.highlight-name {
+    display: inline-block;
+    color: #ffff00;
     font-weight: 900;
     font-style: italic;
-    font-size: 22px;
+    font-size: 26px;
+    text-shadow: 2px 2px 0px var(--manga-black);
+    transform: skewX(-10deg);
+    margin: 8px 0;
   }
 
+  /* Wrapper per l'immagine del codice */
   .image-wrapper {
-    background: #000;
-    padding: 10px;
-    border-radius: 8px;
-    border: 2px dashed rgba(255, 255, 255, 0.3);
-    margin: 0 auto 30px auto;
+    background: var(--manga-black);
+    padding: 12px;
+    border-radius: 12px;
+    border: 3px solid var(--manga-black);
+    margin: 0 auto 40px auto;
     position: relative;
     max-width: 600px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    box-shadow: 8px 8px 0px rgba(0, 240, 255, 0.4);
+    transition: transform 0.2s ease;
+    z-index: 3;
   }
 
   .image-wrapper:hover {
-    transform: scale(1.02);
-    border-color: var(--fh-blue);
+    transform: scale(1.02) rotate(0.5deg);
   }
 
   .image-wrapper img {
     width: 100%;
     height: auto;
     display: block;
-    border-radius: 4px;
+    border-radius: 8px;
   }
 
   .image-wrapper::after {
-    content: 'CODICE FESTIVAL UFFICIALE';
+    content: 'ホライゾン特別アクセス • VIP PASS';
     position: absolute;
-    bottom: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--fh-blue);
-    color: #000;
-    padding: 2px 15px;
-    font-size: 12px;
+    bottom: -15px;
+    right: 25px;
+    background: var(--fh-pink);
+    color: #fff;
+    padding: 4px 18px;
+    font-size: 11px;
     font-weight: 900;
-    border-radius: 10px;
+    border: 2px solid var(--manga-black);
+    transform: rotate(-1.5deg);
     letter-spacing: 1px;
+    box-shadow: 3px 3px 0px var(--manga-black);
   }
 
+  /* Sezione Istruzioni */
   .instructions {
-    background: linear-gradient(90deg, rgba(255,0,120,0.1), rgba(0,240,255,0.1));
-    border-left: 4px solid var(--fh-pink);
+    background: var(--manga-black);
+    border: 3px solid var(--manga-black);
     padding: 25px;
     text-align: left;
-    border-radius: 0 8px 8px 0;
+    border-radius: 10px;
+    position: relative;
+    z-index: 2;
+    box-shadow: inset 0 0 20px rgba(255,0,120,0.15);
   }
 
   .instructions h3 {
     font-family: 'Oswald', sans-serif;
     text-transform: uppercase;
-    font-size: 24px;
+    font-size: 22px;
     margin-bottom: 15px;
-    color: #fff;
+    color: var(--fh-blue);
     display: flex;
     align-items: center;
     gap: 10px;
   }
 
+  .instructions h3 span {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 14px;
+    color: var(--fh-pink);
+    border: 1px solid var(--fh-pink);
+    padding: 1px 6px;
+    border-radius: 3px;
+  }
+
   .instructions ol {
     margin-left: 20px;
-    line-height: 1.7;
-    font-size: 16px;
+    line-height: 1.8;
+    font-size: 15px;
+  }
+
+  .instructions li {
+    margin-bottom: 8px;
   }
 
   .instructions li::marker {
-    color: var(--fh-blue);
+    color: var(--fh-pink);
     font-weight: 900;
+    font-size: 18px;
   }
 
+  /* Footer stile biglietto ferroviario giapponese */
   .footer {
     text-align: center;
-    padding: 20px;
-    background: rgba(0,0,0,0.9);
-    font-size: 12px;
-    color: rgba(255,255,255,0.5);
-    letter-spacing: 2px;
+    padding: 22px;
+    background: var(--manga-black);
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 3px;
+    border-top: 3px solid var(--manga-black);
+    font-family: 'Oswald', sans-serif;
   }
 
   /* Responsive */
   @media (max-width: 600px) {
-    .title { font-size: 32px; }
-    .subtitle { font-size: 16px; }
-    .content { padding: 20px; }
-    .header-badge { display: none; }
+    .title { font-size: 38px; }
+    .japanese-title { font-size: 15px; }
+    .content { padding: 20px 15px; }
+    .manga-burst { display: none; }
+    .side-kanji-left, .side-kanji-right { display: none; }
+    .rising-sun { width: 300px; height: 300px; }
   }
 
-  /* Modalità Stampa: Rimuove i colori scuri pesanti per risparmiare inchiostro se viene stampato */
+  /* Stampa intelligente senza spreco di inchiostro */
   @media print {
     body { background: white; color: black; }
-    .grid-overlay { display: none; }
-    .ticket { background: white; box-shadow: none; border: 2px solid black; clip-path: none; }
-    .header { background: white; border-bottom: 2px solid black; }
+    .japan-bg, .sakura-container { display: none; }
+    .ticket { background: white; border: 3px solid black; box-shadow: none; transform: none; }
+    .header { background: white; border-bottom: 3px solid black; }
     .title { color: black; text-shadow: none; }
-    .subtitle { color: black; }
-    .content, .footer, .instructions { background: white; color: black; }
-    .message span { color: black; }
-    .image-wrapper { border: 1px solid black; box-shadow: none; }
-    .image-wrapper::after { background: black; color: white; }
-    .instructions { border: 1px solid black; border-left: 4px solid black; }
+    .japanese-title { color: black; }
+    .message-box { background: white; border: 2px solid black; box-shadow: none; }
+    .message-box::before { background: white; color: black; border: 2px solid black; }
+    .message span.highlight-name { color: black; text-shadow: none; }
+    .image-wrapper { border: 2px solid black; box-shadow: none; background: white; }
+    .image-wrapper::after { background: white; color: black; border: 2px solid black; box-shadow: none; }
+    .instructions { background: white; color: black; border: 2px solid black; box-shadow: none; }
+    .footer { background: white; color: black; border-top: 2px solid black; }
   }
 </style>
 </head>
 <body>
 
-<div class="grid-overlay"></div>
+<!-- SFONDO GIAPPONESE E PETALI -->
+<div class="japan-bg">
+  <div class="rising-sun"></div>
+  <!-- SVG del Monte Fuji stilizzato per compatibilità offline -->
+  <svg class="fuji-silhouette" viewBox="0 0 1000 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M 0 300 L 350 300 L 500 80 Q 505 70 510 80 L 660 300 L 1000 300 Z" fill="#0c0a12" />
+    <path d="M 465 140 L 535 140 L 520 115 L 515 125 L 500 105 L 485 125 Z" fill="#ffffff" opacity="0.3"/>
+  </svg>
+</div>
+
+<div class="sakura-container">
+  <div class="petal"></div>
+  <div class="petal"></div>
+  <div class="petal"></div>
+  <div class="petal"></div>
+  <div class="petal"></div>
+  <div class="petal"></div>
+  <div class="petal"></div>
+  <div class="petal"></div>
+  <div class="petal"></div>
+  <div class="petal"></div>
+</div>
 
 <div class="ticket">
+  <!-- Top bar stile manga -->
+  <div class="manga-banner">
+    <div>HORIZON CO. 🇯🇵 TOKYO DIVISION</div>
+    <span>祝二十五歳</span>
+  </div>
+
   <div class="header">
-    <div class="header-badge">VIP PASS</div>
-    <h1 class="title">Forza Horizon Festival</h1>
-    <div class="subtitle">Livello 25 Sbloccato</div>
+    <div class="manga-burst">25!</div>
+    <h1 class="title">Forza Horizon</h1>
+    <div class="japanese-title">アントニオ • 日本フェスティバル</div>
   </div>
   
   <div class="content">
-    <div class="message">
-      Benvenuto nel club, Pilota!<br>
-      Il motore è su di giri, la griglia di partenza è allineata e il tuo nuovo bolide ti aspetta.<br>
-      <span>BUON 25° COMPLEANNO ANTONIO!</span><br>
-      Preparati a bruciare l'asfalto in Giappone!
+    <!-- Kanji artistici fluttuanti ai lati (Solo Desktop) -->
+    <div class="side-kanji-left">祝<br>誕<br>生</div>
+    <div class="side-kanji-right">速<br>度<br>極</div>
+
+    <div class="message-box">
+      <div class="message">
+        Benvenuto nel Club, Pilota!<br>
+        Il motore ruggisce e la griglia di partenza di Tokyo è pronta per te.<br>
+        <span class="highlight-name">BUON 25° COMPLEANNO ANTONIO!</span><br>
+        Allaccia le cinture, la leggenda di Horizon 6 ha inizio adesso.
+      </div>
     </div>
 
-    <!-- Immagine fornita -->
+    <!-- Foto del Codice Fornita -->
     <div class="image-wrapper">
-      <img src="Screenshot 2026-06-20 131711.png" alt="Codice Regalo Microsoft Store Forza Horizon 6" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'300\' viewBox=\'0 0 600 300\'%3E%3Crect width=\'600\' height=\'300\' fill=\'%23111\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' font-family=\'Arial\' font-size=\'20\' fill=\'%23ff0078\' text-anchor=\'middle\' alignment-baseline=\'middle\'%3E%E2%9A%A0%FE%0F Assicurati che l\'immagine \'Screenshot 2026-06-20 131711.png\' sia in questa cartella%3C/text%3E%3C/svg%3E'">
+      <img src="Screenshot 2026-06-20 131711.png" alt="Codice Regalo Microsoft Store Forza Horizon 6" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'300\' viewBox=\'0 0 600 300\'%3E%3Crect width=\'600\' height=\'300\' fill=\'%23111\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' font-family=\'Arial\' font-size=\'18\' fill=\'%23ff0078\' text-anchor=\'middle\' alignment-baseline=\'middle\'%3E%E2%9A%A0%FE%0F Assicurati che l\'immagine \'Screenshot 2026-06-20 131711.png\' sia in questa cartella%3C/text%3E%3C/svg%3E'">
     </div>
 
     <div class="instructions">
-      <h3>🏎️ Telemetria & Riscatto</h3>
+      <h3>🏎️ RISCATTA IL CODICE <span>手順</span></h3>
       <ol>
         <li>Accendi il motore della tua <strong>Xbox</strong> o apri il <strong>Microsoft Store</strong> su PC.</li>
-        <li>Naviga fino ai box nella sezione <strong>"Riscatta codice"</strong>.</li>
-        <li>Inserisci la stringa alfanumerica di 25 caratteri riportata nel pass qui sopra.</li>
-        <li>Conferma, scarica l'aggiornamento e mettiti al volante!</li>
+        <li>Dirigiti nei box cliccando sulla sezione <strong>"Riscatta codice"</strong>.</li>
+        <li>Inserisci la chiave alfanumerica di 25 caratteri riportata nel pass qui sopra.</li>
+        <li>Scarica il pacchetto, premi sull'acceleratore e goditi il festival!</li>
       </ol>
     </div>
   </div>
 
   <div class="footer">
-    VALIDO PER: PC & XBOX SERIES X|S • REGIONE: WORLDWIDE • ACCESSO: GARANTITO
+    VALID FOR: PC & XBOX SERIES X|S • PRODUCT: DIGITAL KEY • CODE TYPE: WORLDWIDE
   </div>
 </div>
 
